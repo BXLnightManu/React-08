@@ -13,25 +13,21 @@ export class FormComponent extends Component {
     }
 
     onChange = e => {
-        const titleR = e.target.value;
-        this.setState({title: titleR, globalTitle: "My form - " + titleR});
+        const titleSubmited = e.target.value;
+        this.setState({title: titleSubmited, globalTitle: "My form - " + titleSubmited});
     }
 
     componentDidUpdate(prevProps, prevState) {
         if(prevState.globalTitle!==this.state.globalTitle) {
             console.log("Title changed");
-            this.submitForm();
         }
-    }
-    submitForm = e => {
-        console.log("Title changed");
     }
 
     render() {
         return(
             <div>
-                <h1> My form</h1>
-                <form onSubmit={this.submitForm}>
+                <h1>{this.state.globalTitle}</h1>
+                <form>
                     <fieldset>
                         <legend>Information</legend>
                         <div className="form-data">
@@ -40,7 +36,7 @@ export class FormComponent extends Component {
                                 type="text"
                                 id="title"
                                 name="title"
-                                placeholder={this.state.title}
+                                value={this.state.title}
                                 onChange={this.onChange}
                             />
                         </div>
